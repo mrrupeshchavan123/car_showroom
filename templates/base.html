@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Car Showroom {% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-purple-50 to-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-blue-900 bg-opacity-90 backdrop-blur-md text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://imgs.search.brave.com/sa9dMRWCz2YKLN23rUY-xCSDNW6IdJ8t2DzrU2lALwY/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQz/ODA3MzU4NC92ZWN0/b3IvcmMtcmFjaW5n/LWNhci12ZWN0b3It/aWxsdXN0cmF0aW9u/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz00WXk0TjdieDd1/emhWU2RwNnFvUlJT/M3Vvb1RacmZ3VUxo/blBVN3JEOEE4PQ" alt="Car Showroom Logo" class="h-12 mr-3 animate-bounce-slow">
+                <h1 class="text-3xl font-extrabold tracking-tight">Car Showroom</h1>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="{{ url_for('index') }}" class="hover:text-purple-300 transition font-medium">Home</a>
+                <a href="{{ url_for('add_car') }}" class="hover:text-purple-300 transition font-medium">Add Car</a>
+                <a href="{{ url_for('all_cars') }}" class="hover:text-purple-300 transition font-medium">All Cars</a>
+                <a href="{{ url_for('contact') }}" class="hover:text-purple-300 transition font-medium">Contact Us</a>
+                <a href="{{ url_for('cart') }}" class="hover:text-purple-300 transition font-medium">Cart ({{ session.get('cart', []) | length }})</a>
+            </div>
+            <button id="menu-btn" class="md:hidden focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-800 bg-opacity-90 p-4 animate-slide-in">
+            <a href="{{ url_for('index') }}" class="block py-2 hover:text-purple-300 transition">Home</a>
+            <a href="{{ url_for('add_car') }}" class="block py-2 hover:text-purple-300 transition">Add Car</a>
+            <a href="{{ url_for('all_cars') }}" class="block py-2 hover:text-purple-300 transition">All Cars</a>
+            <a href="{{ url_for('contact') }}" class="block py-2 hover:text-purple-300 transition">Contact Us</a>
+            <a href="{{ url_for('cart') }}" class="block py-2 hover:text-purple-300 transition">Cart ({{ session.get('cart', []) | length }})</a>
+        </div>
+    </nav>
+
+    <!-- Flash Messages (Toast-like) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="fixed bottom-4 right-4 p-4 rounded-xl shadow-2xl animate-slide-in flex items-center {% if category == 'success' %}bg-gold-500{% else %}bg-red-500{% endif %} text-white">
+                    <span class="mr-2">
+                        {% if category == 'success' %}
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        {% else %}
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        {% endif %}
+                    </span>
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+    <script>
+        // Minimal JavaScript for mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('animate-slide-in');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Home - Car Showroom{% endblock %}
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold mb-4 animate-fade-in">Discover Your Dream Car</h2>
+            <p class="text-xl mb-8">Explore our premium collection of vehicles with unbeatable prices.</p>
+            <a href="{{ url_for('all_cars') }}" class="bg-gold-500 hover:bg-gold-600 text-white px-8 py-3 rounded-full text-lg font-medium transition">Shop Now</a>
+        </div>
+    </section>
+    <!-- Sidebar -->
+    <div class="flex">
+        <div id="sidebar" class="bg-gray-900 text-white w-72 p-6 hidden md:block shadow-2xl transition-transform duration-300">
+            <h2 class="text-2xl font-bold mb-6">Manage Cars</h2>
+            <a href="{{ url_for('add_car') }}" class="bg-gold-500 hover:bg-gold-600 text-white px-4 py-3 mb-4 w-full rounded-xl transition shadow-md block text-center">Add New Car</a>
+            <a href="{{ url_for('all_cars') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 mb-4 w-full rounded-xl transition shadow-md block text-center">View All Cars</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mx-auto p-6 flex-1">
+            <h2 class="text-4xl font-bold mb-6 text-gray-800">Available Cars</h2>
+            <!-- Search Bar -->
+            <form method="GET" action="{{ url_for('index') }}" class="mb-6">
+                <input type="text" name="search" value="{{ search_query }}" placeholder="Search cars by name..." class="w-full p-4 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 transition bg-white bg-opacity-80 backdrop-blur-sm">
+            </form>
+            <!-- Car Grid -->
+            {% if cars %}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for car in cars %}
+                        <div class="car-card bg-white bg-opacity-80 backdrop-blur-sm p-6 rounded-xl shadow-md animate-fade-in">
+                            <img src="{{ car.image }}" alt="{{ car.name }}" class="w-full h-60 object-cover rounded-lg mb-4 transform transition duration-300 hover:scale-105">
+                            <h3 class="text-2xl font-bold text-gray-800">{{ car.name }}</h3>
+                            <p class="text-gray-600 mb-4">${{ "%.2f" % car.price }}</p>
+                            <form method="POST" action="{{ url_for('cart') }}">
+                                <input type="hidden" name="car_id" value="{{ car.id }}">
+                                <button type="submit" class="bg-gold-500 hover:bg-gold-600 text-white px-6 py-3 rounded-xl w-full transition shadow-md">Add to Cart</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-600 text-center text-lg col-span-full">No cars found.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

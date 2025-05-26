@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}All Cars - Car Showroom{% endblock %}
+{% block content %}
+    <div class="container mx-auto p-6">
+        <h2 class="text-4xl font-bold mb-6 text-gray-800">All Cars</h2>
+        {% if cars %}
+            <div class="space-y-8">
+                {% for car in cars %}
+                    <div class="bg-white bg-opacity-80 backdrop-blur-sm p-6 rounded-xl shadow-md animate-fade-in flex justify-between items-center">
+                        <div class="flex items-center">
+                            <img src="{{ car.image }}" alt="{{ car.name }}" class="w-36 h-36 object-cover rounded-lg transform transition duration-300 hover:scale-105">
+                            <div class="ml-6">
+                                <h3 class="text-2xl font-bold text-gray-800">{{ car.name }}</h3>
+                                <p class="text-gray-600">${{ "%.2f" % car.price }}</p>
+                            </div>
+                        </div>
+                        <div class="space-x-4">
+                            <a href="{{ url_for('edit_car', id=car.id) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl transition shadow-md">Edit</a>
+                            <form method="POST" action="{{ url_for('delete_car', id=car.id) }}" style="display:inline;">
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete {{ car.name }}?')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl transition shadow-md">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-600 text-center text-lg">No cars available.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "name": "Toyota Corolla",
+        "price": 20000.0,
+        "image": "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Dzire/11387/1731318279714/front-left-side-47.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Honda Civic",
+        "price": 22000.0,
+        "image": "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Dzire/11387/1731318279714/front-left-side-47.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Ford Mustang",
+        "price": 35000,
+        "image": "https://via.placeholder.com/300x200?text=Ford+Mustang"
+    },
+    {
+        "id": 4,
+        "name": "Tesla Model 3",
+        "price": 40000,
+        "image": "https://via.placeholder.com/300x200?text=Tesla+Model+3"
+    },
+    {
+        "id": 5,
+        "name": "BMW X5",
+        "price": 60000,
+        "image": "https://via.placeholder.com/300x200?text=BMW+X5"
+    },
+    {
+        "id": 6,
+        "name": "Audi Q7",
+        "price": 55000,
+        "image": "https://via.placeholder.com/300x200?text=Audi+Q7"
+    },
+    {
+        "id": 7,
+        "name": "Mercedes C-Class",
+        "price": 45000,
+        "image": "https://via.placeholder.com/300x200?text=Mercedes+C-Class"
+    },
+    {
+        "id": 8,
+        "name": "Volkswagen Golf",
+        "price": 25000,
+        "image": "https://via.placeholder.com/300x200?text=Volkswagen+Golf"
+    },
+    {
+        "id": 9,
+        "name": "Chevrolet Camaro",
+        "price": 38000,
+        "image": "https://via.placeholder.com/300x200?text=Chevrolet+Camaro"
+    },
+    {
+        "id": 10,
+        "name": "Nissan Altima",
+        "price": 24000,
+        "image": "https://via.placeholder.com/300x200?text=Nissan+Altima"
+    },
+    {
+        "id": 11,
+        "name": "scarpio",
+        "price": 1212121.0,
+        "image": "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Dzire/11387/1731318279714/front-left-side-47.jpg"
+    }
+]
